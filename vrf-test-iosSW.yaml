@@ -1,0 +1,29 @@
+---
+
+- hosts: switches
+  gather_facts: no
+  connection: network_cli
+
+  vars:
+    ansible_network_os: ios
+    ansible_command_timeout: 30
+    ansible_user: cisco
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_become_password: cisco
+
+  tasks:
+   - name: configure a vrf named test
+     ios_vrf:
+       name: test-Ansible-VRF
+       description: test-vrf from ansible
+       authorize: no
+       auth_pass: "{{ enable_pass }}"
+       username: "{{ ansible_ssh_user }}"
+       password: "{{ ansible_ssh_pass }}"
+       interfaces:
+         - GigabitEthernet1/3
+
+   - name: message display
+     debug:
+       msg: IOSスイッチのVRFを設定しました from Ansible

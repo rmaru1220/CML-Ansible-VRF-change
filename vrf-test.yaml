@@ -1,0 +1,19 @@
+---
+
+- name: IOS-SW vrf configure
+  import_playbook: vrf-tasks/vrf-test-iosSW.yaml
+
+- name: IOS-RT vrf configure
+  import_playbook: vrf-tasks/vrf-test-iosRT.yaml
+
+- name: CSR-RT vrf configure
+  import_playbook: vrf-tasks/vrf-test-csrRT.yaml
+
+- name: Nexus vrf configure
+  import_playbook: vrf-tasks/vrf-test-nexus.yaml
+
+- hosts: localhost
+  tasks:
+   - name: complete message
+     debug:
+       msg: "#####すべての動作を完了しました#####"
